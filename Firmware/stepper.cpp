@@ -636,6 +636,56 @@ ISR(TIMER1_COMPA_vect)
 }
 
 #ifdef HAVE_TMC2130_DRIVERS
+void tmc2130_read(uint8_t chipselect, uint8_t address)
+{
+  uint32_t val32;
+  uint8_t val0;
+  uint8_t val1;
+  uint8_t val2;
+  uint8_t val3;
+  uint8_t val4;
+
+  //datagram1 - read request (address + dummy write)
+  SPI.beginTransaction(SPISettings(1000000, MSBFIRST, SPI_MODE3));
+  digitalWrite(chipselect,LOW);
+  SPI.transfer(address & 0x80);
+  SPI.transfer(0);
+  SPI.transfer(0);
+  SPI.transfer(0);
+  SPI.transfer(0);
+  digitalWrite(chipselect, HIGH);
+  SPI.endTransaction();
+
+  //datagram2 - response
+  SPI.beginTransaction(SPISettings(1000000, MSBFIRST, SPI_MODE3));
+  digitalWrite(chipselect,LOW);
+  val0 = SPI.transfer(0);
+  val1 = SPI.transfer(0);
+  val2 = SPI.transfer(0);
+  val3 = SPI.transfer(0);
+  val4 = SPI.transfer(0);
+  digitalWrite(chipselect, HIGH);
+  SPI.endTransaction();
+  
+  MYSERIAL.print("SPIRead 0x");
+  MYSERIAL.print(address,HEX);
+  MYSERIAL.print(" Status:");
+  MYSERIAL.print(val0 & 0b00000111,BIN);
+  MYSERIAL.print("  ");
+  MYSERIAL.print(val1,BIN);
+  MYSERIAL.print("  ");
+  MYSERIAL.print(val2,BIN);
+  MYSERIAL.print("  ");
+  MYSERIAL.print(val3,BIN);
+  MYSERIAL.print("  ");
+  MYSERIAL.print(val4,BIN);
+
+  val32 = (uint32_t)val1<<24 | (uint32_t)val2<<16 | (uint32_t)val3<<8 | (uint32_t)val4;
+  MYSERIAL.print(" 0x");
+  MYSERIAL.println(val32,HEX);
+}
+
+
 void tmc2130_write(uint8_t chipselect, uint8_t address,uint8_t wval1,uint8_t wval2,uint8_t wval3,uint8_t wval4)
 {
   uint32_t val32;

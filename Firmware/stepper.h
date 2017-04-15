@@ -91,7 +91,10 @@ void microstep_readings();
 #ifdef BABYSTEPPING
   void babystep(const uint8_t axis,const bool direction); // perform a short step with a single stepper motor, outside of any convention
 #endif
-     
+
+#if defined(HAVE_TMC2130_DRIVERS)
+void tmc2130_read(uint8_t chipselect, uint8_t address);
+#endif
 
 
 #endif

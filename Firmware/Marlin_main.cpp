@@ -4539,6 +4539,21 @@ Sigma_Exit:
     }
     break;
 
+    #if defined(HAVE_TMC2130_DRIVERS)
+    case 275:
+      {
+        uint8_t cs[4] = { X_TMC2130_CS, Y_TMC2130_CS, Z_TMC2130_CS, E0_TMC2130_CS };
+        for(uint8_t i=0;i<4;i++) tmc2130_read(cs[i],0x6F); //DRV_STATUS
+      }
+      break;
+    case 276:
+      {
+        uint8_t cs[4] = { X_TMC2130_CS, Y_TMC2130_CS, Z_TMC2130_CS, E0_TMC2130_CS };
+        for(uint8_t i=0;i<4;i++) tmc2130_read(cs[i],0x1); //GSTAT
+      }
+      break;
+    #endif
+
     #if NUM_SERVOS > 0
     case 280: // M280 - set servo position absolute. P: servo index, S: angle or microseconds
       {
