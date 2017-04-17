@@ -648,7 +648,7 @@ void tmc2130_read(uint8_t chipselect, uint8_t address)
   //datagram1 - read request (address + dummy write)
   SPI.beginTransaction(SPISettings(1000000, MSBFIRST, SPI_MODE3));
   digitalWrite(chipselect,LOW);
-  SPI.transfer(address & 0x80);
+  SPI.transfer(address);
   SPI.transfer(0);
   SPI.transfer(0);
   SPI.transfer(0);

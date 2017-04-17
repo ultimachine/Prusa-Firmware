@@ -164,6 +164,7 @@ MOTOR CURRENT SETTINGS
 #define DEFAULT_PWM_MOTOR_CURRENT_LOUD  {540, 830, 500} // {XY,Z,E}
 #endif
 
+// Motor Current setting for Einsy Rambo
 #if MOTHERBOARD == 304
 //Motor current PWM conversion, PWM value = MotorCurrentSetting * 255 / range
 #define MOTOR_CURRENT_PWM_RANGE 2000
