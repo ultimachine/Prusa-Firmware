@@ -168,8 +168,8 @@ MOTOR CURRENT SETTINGS
 #if MOTHERBOARD == 304
 //Motor current PWM conversion, PWM value = MotorCurrentSetting * 255 / range
 #define MOTOR_CURRENT_PWM_RANGE 2000
-#define DEFAULT_PWM_MOTOR_CURRENT  {1000, 1300, 1100}
-#define DEFAULT_PWM_MOTOR_CURRENT_LOUD  {1300, 1300, 1300}
+#define DEFAULT_PWM_MOTOR_CURRENT  {1000, 1100, 1100}
+#define DEFAULT_PWM_MOTOR_CURRENT_LOUD  {1000, 1100, 1100}
 #endif
 
 /*------------------------------------
