@@ -1165,16 +1165,15 @@ void digipot_init() //Initialize Digipot Motor Current
   EEPROM_read_st(EEPROM_SILENT,(uint8_t*)&SilentMode,sizeof(SilentMode));
   SilentModeMenu = SilentMode;
   #if defined(DIGIPOTSS_PIN) && DIGIPOTSS_PIN > -1
-    if(SilentMode == 0){
-    const uint8_t digipot_motor_current[] = DIGIPOT_MOTOR_CURRENT_LOUD;
-    }else{
-      const uint8_t digipot_motor_current[] = DIGIPOT_MOTOR_CURRENT;
-    }
     SPI.begin();
     pinMode(DIGIPOTSS_PIN, OUTPUT);
-    for(int i=0;i<=4;i++)
-      //digitalPotWrite(digipot_ch[i], digipot_motor_current[i]);
-      digipot_current(i,digipot_motor_current[i]);
+    if(SilentMode == 0){
+      const uint8_t digipot_motor_current[] = DIGIPOT_MOTOR_CURRENT_LOUD;
+      for(int i=0;i<=4;i++) digipot_current(i,digipot_motor_current[i]); //digitalPotWrite(digipot_ch[i], digipot_motor_current[i]);
+    }else{
+      const uint8_t digipot_motor_current[] = DIGIPOT_MOTOR_CURRENT;
+      for(int i=0;i<=4;i++) digipot_current(i,digipot_motor_current[i]); //digitalPotWrite(digipot_ch[i], digipot_motor_current[i]);
+    }
   #endif
   #ifdef MOTOR_CURRENT_PWM_XY_PIN
     pinMode(MOTOR_CURRENT_PWM_XY_PIN, OUTPUT);
