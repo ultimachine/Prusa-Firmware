@@ -8347,7 +8347,9 @@ void uvlo_()
 	if(sd_print) eeprom_update_byte((uint8_t*)EEPROM_UVLO, 1);
 
     st_synchronize();
+#ifdef TMC2130
     printf_P(_N("stps%d\n"), tmc2130_rd_MSCNT(Z_AXIS));
+#endif
 
     disable_z();
     

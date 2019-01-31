@@ -9,10 +9,10 @@
   #error Oops!  Make sure you have 'Arduino Mega 2560 or Rambo' selected from the 'Tools -> Boards' menu.
 #endif
 
-#define TMC2130
-#define UVLO_SUPPORT
+//#define TMC2130
+//#define UVLO_SUPPORT
 
-#define AMBIENT_THERMISTOR
+//#define AMBIENT_THERMISTOR
 #define PINDA_THERMISTOR
 
 #define W25X20CL                 // external 256kB flash
@@ -25,19 +25,20 @@
 
 
 #define X_TMC2130_CS           41
-#define X_TMC2130_DIAG         64 // !!! changed from 40 (EINY03)
+#define X_TMC2130_DIAG         -1
 #define X_STEP_PIN             37
 #define X_DIR_PIN              49
 #define X_MIN_PIN            12
 //#define X_MAX_PIN            30
 //#define X_MIN_PIN              X_TMC2130_DIAG
 #define X_MAX_PIN              X_TMC2130_DIAG
+//X_TMC2130_DIAG
 #define X_ENABLE_PIN           29
 #define X_MS1_PIN           -1
 #define X_MS2_PIN           -1
 
 #define Y_TMC2130_CS        39
-#define Y_TMC2130_DIAG      69
+#define Y_TMC2130_DIAG      -1
 #define Y_STEP_PIN          36
 #define Y_DIR_PIN           48
 #define Y_MIN_PIN           11
@@ -49,7 +50,7 @@
 #define Y_MS2_PIN           -1
 
 #define Z_TMC2130_CS        67
-#define Z_TMC2130_DIAG      68
+#define Z_TMC2130_DIAG      -1
 #define Z_STEP_PIN          35
 #define Z_DIR_PIN           47
 #define Z_MIN_PIN           10
@@ -80,7 +81,7 @@
 
 
 #define E0_TMC2130_CS       66
-#define E0_TMC2130_DIAG     65
+#define E0_TMC2130_DIAG     -1
 #define E0_STEP_PIN         34
 #define E0_DIR_PIN          43
 #define E0_ENABLE_PIN       26

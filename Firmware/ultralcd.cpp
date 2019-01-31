@@ -6590,7 +6590,7 @@ static bool lcd_selfcheck_axis(int _axis, int _travel)
 	return _stepresult;
 }
 
-#ifndef TMC2130
+#if defined(DEFAULT_PWM_MOTOR_CURRENT) && defined(DEFAULT_PWM_MOTOR_CURRENT_LOUD)
 static bool lcd_selfcheck_pulleys(int axis)
 {
 	float tmp_motor_loud[3] = DEFAULT_PWM_MOTOR_CURRENT_LOUD;
@@ -6657,8 +6657,11 @@ static bool lcd_selfcheck_pulleys(int axis)
 	}
 	return(true);
 }
+#else
+  static bool lcd_selfcheck_pulleys(int axis) { return(true); }
+#endif
 
-
+#ifndef TMC2130 //mechanical endstops!
 static bool lcd_selfcheck_endstops()
 {
 	bool _result = true;
