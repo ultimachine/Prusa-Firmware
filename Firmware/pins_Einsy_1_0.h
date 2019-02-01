@@ -22,7 +22,10 @@
 #define SWI2C_SDA      20 //SDA on P3
 #define SWI2C_SCL      21 //SCL on P3
 
-
+#define X_UART_PIN      64
+#define Y_UART_PIN      69
+#define Z_UART_PIN      68
+#define E0_UART_PIN     65
 
 #define X_TMC2130_CS           41
 #define X_TMC2130_DIAG         -1

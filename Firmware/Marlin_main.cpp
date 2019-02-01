@@ -98,6 +98,10 @@
 #include "tmc2130.h"
 #endif //TMC2130
 
+#ifdef TMC2208_COMMUNICATION
+#include "tmc2208.h"
+#endif //TMC2208_COMMUNUCATION
+
 #ifdef W25X20CL
 #include "w25x20cl.h"
 #include "optiboot_w25x20cl.h"
@@ -1498,7 +1502,7 @@ void setup()
 		  // Reset the babystepping values, so the printer will not move the Z axis up when the babystepping is enabled.
 		  eeprom_update_word((uint16_t*)EEPROM_BABYSTEP_Z, 0);
 		  // Show the message.
-		  lcd_show_fullscreen_message_and_wait_P(_T(MSG_FOLLOW_CALIBRATION_FLOW));
+		  //lcd_show_fullscreen_message_and_wait_P(_T(MSG_FOLLOW_CALIBRATION_FLOW));
 	  }
 	  else if (calibration_status() == CALIBRATION_STATUS_LIVE_ADJUST) {
 		  // Show the message.
@@ -1595,6 +1599,9 @@ void setup()
   wdt_enable(WDTO_4S);
 #endif //WATCHDOG
 
+#ifdef TMC2130
+  crashdet_disable();
+#endif
 }
 
 
@@ -6623,6 +6630,14 @@ if((eSoundMode==e_SOUND_MODE_LOUD)||(eSoundMode==e_SOUND_MODE_ONCE))
     case 900: // M900: Set LIN_ADVANCE options.
         gcode_M900();
     break;
+#endif
+
+#ifdef TMC2208_COMMUNICATION
+  case 905: //! M905 - TMC2208 init
+    {
+    tmc2208_init();
+    tmc2208_read_status();
+    }
 #endif
 
     case 907: // M907 Set digital trimpot motor current using axis codes.

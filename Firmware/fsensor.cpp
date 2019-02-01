@@ -360,7 +360,11 @@ bool fsensor_oq_result(void)
 	return res;
 }
 
+#ifdef FILAMENT_SENSOR
 ISR(FSENSOR_INT_PIN_VECT)
+#else
+void fsensor_conflicts_with_SoftwareSerialWithHalfDuplex() //multiple definition of `__vector_10'
+#endif
 {
 	if (mmu_enabled) return;
 	if (!((fsensor_int_pin_old ^ FSENSOR_INT_PIN_PIN_REG) & FSENSOR_INT_PIN_MASK)) return;
